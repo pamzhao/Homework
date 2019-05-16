@@ -7,7 +7,7 @@ create table grosses (
 	rank int primary key,
     title varchar(255),
     studio varchar(255),
-    worldwilde double,
+    worldwide double,
     domestic double,
     dom_pct double,
     overseas double,
@@ -19,4 +19,4 @@ create table movies (
     rank int,
     rating varchar(50),
     imdbscore double,
-    director varchar(255));
+    directors varchar(255));
