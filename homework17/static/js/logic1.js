@@ -73,9 +73,9 @@ function createMap(earthquakes) {
   };
 
   // Create myMap, giving it the satellite map and earthquakes layers to display on load
-  let myMap = L.map('mapid', {
+  let myMap = L.map("map", {
     center: [37.09, -95.71],
-    zoom: 3,
+    zoom: 4,
     layers: [satellite, earthquakes]
   });
   
@@ -85,6 +85,24 @@ function createMap(earthquakes) {
   L.control.layers(baseMaps, overlayMap, {
     collapsed: false
   }).addTo(myMap);
+
+  // Create legend
+  var legend = L.control({position: 'bottomleft'});
+
+  legend.onAdd = function(myMap) {
+    var div = L.DomUtil.create('div', 'legendInfo'),
+      grades = [0, 1, 2, 3, 4, 5],
+      labels = [];
+
+    for (var i = 0; i < grades.length; i++) {
+      div.innerHTML += '<i style="background:' + setColor(grades[i] + 1) + '"></i>' + 
+        grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    } 
+    return div;
+  };
+
+  legend.addTo(myMap);
+
 }
 
 // Return color base on value
@@ -99,5 +117,5 @@ function setColor(x) {
 
 // set the circle radius
 function setRadius(x) {
-  return x*1000;
+  return x*30000;
 }
