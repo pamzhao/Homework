@@ -86,23 +86,27 @@ function createMap(earthquakes) {
     collapsed: false
   }).addTo(myMap);
 
+
+
+
   // Create legend
-  var legend = L.control({position: 'bottomleft'});
+  var legend = L.control({position: 'bottomright'});
 
-  legend.onAdd = function(myMap) {
-    var div = L.DomUtil.create('div', 'legendInfo'),
-      grades = [0, 1, 2, 3, 4, 5],
-      labels = [];
+  legend.onAdd = function (map) {
 
+    var div = L.DomUtil.create('div', 'info legend'),
+      grades = [0, 1, 2, 3, 4, 5];
+
+    // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
-      div.innerHTML += '<i style="background:' + setColor(grades[i] + 1) + '"></i>' + 
-        grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-    } 
+        div.innerHTML +=
+            '<i style="background:' + setColor(grades[i] + 1) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    }
     return div;
   };
 
   legend.addTo(myMap);
-
 }
 
 // Return color base on value
